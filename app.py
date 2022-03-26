@@ -15,6 +15,11 @@ def hello_world():
     return render_template('index.html')
 
 
+@app.route("/snake")
+def snake():
+    return render_template('snake.html')
+
+
 @app.route('/file')
 def render():
     if 'filename' in request.args:
@@ -24,9 +29,9 @@ def render():
         return "No input file specified"
 
 
-@app.route("/<name>")
-def escape_route(name):
-    return f"Hello, {escape(name)}!"
+# @app.route("/<name>")
+# def escape_route(name):
+#     return f"Hello, {escape(name)}!"
 
 
 if __name__ == '__main__':
