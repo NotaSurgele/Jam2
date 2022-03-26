@@ -29,5 +29,10 @@ def escape_route(name):
     return f"Hello, {escape(name)}!"
 
 
+@app.route("/paint")
+def paint():
+    return render_template("paint.html")
+
+
 if __name__ == '__main__':
     app.run(debug=True, port=8080)
