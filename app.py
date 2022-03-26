@@ -24,9 +24,9 @@ def render():
         return "No input file specified"
 
 
-@app.route("/<name>")
-def escape_route(name):
-    return f"Hello, {escape(name)}!"
+# @app.route("/<name>")
+# def escape_route(name):
+#     return f"Hello, {escape(name)}!"
 
 
 if __name__ == '__main__':
