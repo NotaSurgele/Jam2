@@ -6,6 +6,8 @@ export default class Player
     LEFT = 3;
     player;
     direction = 1;
+    hitbox = 0;
+    velocity = 100
 
     constructor() { }
 
@@ -27,12 +29,19 @@ export default class Player
         })
 
         this.player.setCollideWorldBounds(true);
+        this.hitbox = new Phaser.Geom.Rectangle(this.player.x, this.player.y, 40, 40)
     }
 
-    update(Scene)
+    velocityIncrease() {
+        this.velocity += 15
+    }
+
+    update(Scene, food)
     {
         let cursor = Scene.input.keyboard.createCursorKeys();
 
+        this.hitbox.x = this.player.x
+        this.hitbox.y = this.player.y
         if (cursor.left.isDown && this.direction != this.RIGHT)
             this.direction = this.LEFT;
         else if (cursor.right.isDown && this.direction != this.LEFT)
@@ -44,26 +53,30 @@ export default class Player
         switch (this.direction) {
         case this.LEFT:
             this.player.setVelocityY(0);
-            this.player.setVelocityX(-100);
+            this.player.setVelocityX(-this.velocity);
             this.player.anims.play('move', true);
             break;
         case this.RIGHT:
             this.player.setVelocityY(0);
-            this.player.setVelocityX(100);
+            this.player.setVelocityX(this.velocity);
             this.player.anims.play('move', true);
             break;
         case this.UP:
             this.player.setVelocityX(0);
-            this.player.setVelocityY(-100);
+            this.player.setVelocityY(-this.velocity);
             this.player.anims.play('move', true);
             break;
         case this.DOWN:
             this.player.setVelocityX(0);
-            this.player.setVelocityY(100);
+            this.player.setVelocityY(this.velocity);
             this.player.anims.play('move', true);
             break;
         default:
             break;
+        }
+        if (food.contain(this.hitbox)) {
+            this.velocityIncrease()
+            food.setPosition(800, 600)
         }
     }
 }
