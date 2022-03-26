@@ -1,108 +1,59 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>
-            MyWebsite !
-        </title>
-        <meta charset="UTF-8">
-    </head>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.15.1/dist/phaser-arcade-physics.min.js"></script>
+</head>
+<body>
 
-    <body>
-        <h1>
-            Welcome to MyWebsite !
-        </h1>
+    <script>
+    var config = {
+        type: Phaser.AUTO,
+        width: 1280,
+        height: 720,
+        physics: {
+            default: 'arcade',
+            arcade: {
+                gravity: { y: 200 }
+            }
+        },
+        scene: {
+            preload: preload,
+            create: create
+        }
+    };
 
-        <div class="Summary">
-            <ul>
-                <li>
-                    Présentation
-                        <ul>
-                            <li>Epitech</li>
-                            <li>Ma personne</li>
-                        </ul>
-                </li>
-                <li>Mon Portfolio</li>
-            </ul>
-        </div>
-        <div class="Présentation">
-            <h2>Présentation</h2>
-            <div class="Epitech">
-                <h3>Epitech</h3>
-                <p>
-                    Depuis plus de 20 ans, Epitech, European Institute of Technology, est la référence de la formation en expertise informatique, en digital et en innovation.
-                    Dotée d'une forme d'enseignement unique, innovante et reconnue... Et ça fonctionne !
-                    On y apprend à apprendre à travers un apprentissage par projets, beaucoup de pratique.
-                    Trois valeurs: Courage, Solidarité et Excellence.
-                </p>
-                <!-- <a href="https://www.epitech.eu/fr/ecole-informatique-la-reunion/">
-                    <img src="epi_img.jpg" alt="Epitech slogan+logo" style="width:50%">
-                </a> -->
-                <p> Pour plus d'informations, rendez vous ci-dessous:</br>
-                    <a href="https://www.epitech.eu/en/">Epitech official website</a></br>
-                    <a href="https://www.epitech.eu/fr/">Site officiel d'Epitech</a></br>
-                </p>
-            </div>
-            <div class="Me">
-                <h3>Qui suis-je ?</h3>
-                <p>
-                    Etudiante à Epitech Reunion en 2 ème année promo 2025. J'ai appris à me challenger sans cesse en étant à Epitech.</br>
-                    Investie, curieuse, persévérante, organisée et efficiente dans mon travail. Ayant aujourd'hui pu allier plaisir et travail.
-                </p>
-                <h3>Mon parcours</h3>
-                <p>
-                    2020 à maintenant:<br>
-                    Epitech Reunion promo 2025, Cobra.
-                    <hr>
-                    2017-2020:<br>
-                    Lycée BoisJoly Potier.
-                    <hr>
-                    2016-2020:<br>
-                    Formation de Jeune Sapeur-Pompier.
-                </p>
-                <h3>Mes compétences</h3>
-                <section>
-                    <h4>Langues</h4>
-                    <ul>
-                        <li>Français</li>
-                        <li>Anglais</li>
-                        <li>Espagnol</li>
-                    </ul>
-                </section>
-                <section>
-                    <h4>Langages de programmation</h4>
-                    <ul>
-                        <li>C</li>
-                        <li>C#</li>
-                        <li>Python</li>
-                        <li>C++</li>
-                        <li>Haskell</li>
-                        <li>HTML & CSS</li>
-                        <li>Scratch</li>
-                    </ul>
-                </section>
-                <!-- <h3>Défouloir</h3> -->
-            </div>
-        </div>
-        <div class="Portfolio">
-            <h2>Portfolio</h2>
-            <div>
-                <h3>my_sokoban</h3>
-            </div>
-            <div>
-                <h3>Matchstick</h3>
-            </div>
-            <div>
-                <h3>my_shell</h3>
-            </div>
-            <div>
-                <h3>my_rpg</h3>
-            </div>
-            <div>
-                <h3>my_defender</h3>
-            </div>
-            <div>
-                <h3>my_runner</h3>
-            </div>
-        </div>
-    </body>
+    var game = new Phaser.Game(config);
+
+    function preload ()
+    {
+        this.load.setBaseURL('http://labs.phaser.io');
+
+        this.load.image('sky', 'assets/skies/space3.png');
+        this.load.image('logo', 'assets/sprites/phaser3-logo.png');
+        this.load.image('red', 'assets/particles/red.png');
+    }
+
+    function create ()
+    {
+        this.add.image(1280, 720, 'sky');
+
+        var particles = this.add.particles('red');
+
+        var emitter = particles.createEmitter({
+            speed: 100,
+            scale: { start: 1, end: 0 },
+            blendMode: 'ADD'
+        });
+
+        var logo = this.physics.add.image(1280, 720, 'logo');
+
+        logo.setVelocity(100, 200);
+        logo.setBounce(1, 1);
+        logo.setCollideWorldBounds(true);
+
+        emitter.startFollow(logo);
+    }
+    </script>
+
+</body>
 </html>
