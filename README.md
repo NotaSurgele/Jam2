@@ -1,9 +1,24 @@
-# Jam2
+# jam-app
 
-Install flask:
-  pip install flask --user
+## Project setup
+```
+npm install
+```
 
-To launch your server with the python3:
-- Check that the main function in the app.py file does exist
-- launch your server:
-  python3 app.py
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
+
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Lints and fixes files
+```
+npm run lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
