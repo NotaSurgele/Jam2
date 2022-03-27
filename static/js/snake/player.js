@@ -42,8 +42,8 @@ export default class Player
 
     addBody(Scene) {
         this.player[this.index++] = Scene.physics.add.sprite(100, 32, 'player')
+        this.player[this.index - 1].setTint(0x8de4ff)
         this.directions[this.index - 1] = this.getEnum(this.index - 1)
-        this.player[index].setTint(0x8de4ff)
     }
 
     setDirection(i, Enum) {

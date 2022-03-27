@@ -11,7 +11,7 @@ export default class SnakeGame extends Phaser.Scene
     food = new Food()
     direction = 1
     scoreText
-    music
+    music = new Object()
 
     preload()
     {
@@ -19,7 +19,7 @@ export default class SnakeGame extends Phaser.Scene
         this.load.image('sky', 'http://labs.phaser.io/assets/skies/deepblue.png');
         this.food.preload(this)
         this.player.preload(this)
-        // Game.Game.load.audio('music', '../static/music/game-music.mp3')
+        this.load.audio('jam', '../static/music/Jam.mp3')
     }
 
     create()
@@ -29,8 +29,13 @@ export default class SnakeGame extends Phaser.Scene
         this.player.create(this)
         this.scoreText = this.add.text(10, 10, 'score : 0',
             { fontSize: '32px', fill: '#000'})
-        // music = Game.Game.add.audio('music')
-        // this.music.play()
+        this.music = this.sound.add("jam")
+        let musicConfig = {
+        mute: false,
+        loop: true,
+        delay: 0
+        }
+        this.music.play()
     }
 
     update()

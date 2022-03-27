@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def welcome():
-    return "<h1>Welcome to our website</h1>"
+    return render_template('main.html')
 
 
 @app.route("/html")
@@ -18,6 +18,11 @@ def hello_world():
 @app.route("/snake")
 def snake():
     return render_template('snake.html')
+
+
+@app.route("/runner")
+def runner():
+    return render_template('runner.html')
 
 
 @app.route('/file')
