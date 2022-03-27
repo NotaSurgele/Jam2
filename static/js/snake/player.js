@@ -33,6 +33,7 @@ export default class Player
 
         this.hitbox = new Phaser.Geom.Rectangle(this.player[0].x, this.player[0].y, 50, 50)
         this.directions[0] = this.RIGHT
+        this.player[0].setTint(0x8de4ff)
     }
 
     velocityIncrease() {
@@ -42,6 +43,7 @@ export default class Player
     addBody(Scene) {
         this.player[this.index++] = Scene.physics.add.sprite(100, 32, 'player')
         this.directions[this.index - 1] = this.getEnum(this.index - 1)
+        this.player[index].setTint(0x8de4ff)
     }
 
     setDirection(i, Enum) {
@@ -114,9 +116,8 @@ export default class Player
         {
             let x = this.player[i].x
             let y = this.player[i].y
-            if (x < 0 || x > 800 || y < 0 || y > 400)
+            if (x < 0 || x > 800 || y < 0 || y > 600)
             {
-                Scene.physics.pause
                 this.player[i].setTint(0x05008b)
                 this.player[0].setVelocityX(0)
                 this.player[0].setVelocityY(0)
