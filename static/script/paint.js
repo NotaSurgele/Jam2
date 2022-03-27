@@ -26,6 +26,9 @@ function create() {
     var sgraphic = this.add.graphics({fillStyle: {lineWidth: 9, color: 0x05008B}, lineStyle: {color: 0x05008B}});
     var graphics = this.add.graphics();
 
+    this.add.text(1000, 80, 'TOOLS', { fontSize: '32px', fill: '#0F1154'});
+    this.add.text(950, 135, 'Clear', { fontSize: '32px', fill: '#46E1FF'});
+    this.add.text(100, 750, 'PALETTE', { fontSize: '32px', fill: '#0F1154'});
     sgraphic.lineStyle(4, 0x05008B);
     sgraphic.strokeRectShape(rect);
     graphics.setSi
