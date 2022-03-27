@@ -10,6 +10,7 @@ export default class Player
     player = new Array();
     directions = new Array();
     index = 1
+    score = 0
 
     constructor() { }
 
@@ -30,7 +31,6 @@ export default class Player
             repeat: -1
         })
 
-        this.player[0].setCollideWorldBounds(true);
         this.hitbox = new Phaser.Geom.Rectangle(this.player[0].x, this.player[0].y, 50, 50)
         this.directions[0] = this.RIGHT
     }
@@ -104,6 +104,33 @@ export default class Player
         }
     }
 
+    sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    checkDeath(Scene)
+    {
+        for (var i = this.player.length - 1; i >= 0; i--)
+        {
+            let x = this.player[i].x
+            let y = this.player[i].y
+            if (x < 0 || x > 800 || y < 0 || y > 400)
+            {
+                Scene.physics.pause
+                this.player[i].setTint(0x05008b)
+                this.player[0].setVelocityX(0)
+                this.player[0].setVelocityY(0)
+                this.sleep(5000)
+                    .then(() => location.reload())
+            }
+        }
+    }
+
+    getScore()
+    {
+        return this.score
+    }
+
     update(Scene, food)
     {
         this.hitbox.x = this.player[0].x
@@ -114,6 +141,8 @@ export default class Player
             this.velocityIncrease()
             food.setPosition(800, 600)
             this.addBody(Scene)
+           this.score += 1
         }
+        this.checkDeath(Scene)
     }
 }
