@@ -72,7 +72,7 @@ function create() {
         if (pointer.isDown && Phaser.Geom.Rectangle.Contains(rect, pointer.x, pointer.y)) {
             graphics.lineStyle(1, color);
             graphics.fillStyle(color);
-            circle
+            circle.radius = s;
             if (pointer.x < 100 + (2 * s) || pointer.y < 100 + (2 * s)) {
                 circle.setPosition(pointer.x + s, pointer.y + s);
             } else {
