@@ -33,6 +33,9 @@ function create() {
     // -------------------------------
 
     let swap = 1;
+    var d = 110;
+    var col = new Array();
+    var palette = new Array();
     var circle = new Phaser.Geom.Circle(0, 0, s, color);
     var rect = new Phaser.Geom.Rectangle(100, 100, 800, 600, 0x05008B);
     this.add.rectangle(500, 400, 800, 600, 0xEBFAFA);
@@ -54,6 +57,36 @@ function create() {
     this.add.text(950, 350, 'Size', { fontSize: '32px', fill: '#00BCFF'});
     size = this.add.text(1080, 350, s, { fontSize: '32px', fill: '#05008B'});
     this.add.text(100, 750, 'PALETTE', { fontSize: '32px', fill: '#0F1154'});
+
+    col[0] = 0xDCF8FF;
+    col[1] = 0x709BFF;
+    col[2] = 0x00FFFF;
+    col[3] = 0x96DAF3;
+    col[4] = 0x97BAE2;
+    col[5] = 0xC3E4ED;
+    col[6] = 0x65B2F6;
+    col[7] = 0x6A65F6;
+    col[8] = 0x3232CC;
+    col[9] = 0x2E37FE;
+    col[10] = 0x3300FF;
+    col[11] = 0x6CA6CD;
+    col[12] = 0x007FFF;
+    col[13] = 0x1100FF;
+    col[14] = 0x4D4DFF;
+    col[15] = 0x0883B0;
+    col[16] = 0x1F7CCE;
+    col[17] = 0x3A5FCD;
+    col[18] = 0x1E24BD;
+    col[19] = 0x050983;
+
+    for (var i = 0; i < 20; i++) {
+        palette[i] = new Phaser.Geom.Rectangle(d, 840, 20, 20);
+        graphics.fillStyle(col[i]);
+        graphics.lineStyle(4, 0x05008B);
+        graphics.fillRectShape(palette[i]);
+        graphics.strokeRectShape(palette[i]);
+        d = d + 40;
+    }
 
     pal.setStrokeStyle(4, 0x05008B);
     tol.setStrokeStyle(4, 0x05008B);
@@ -79,6 +112,10 @@ function create() {
             s = s + 1;
         if (pointer.isDown && Phaser.Geom.Triangle.Contains(down, pointer.x, pointer.y) && s > 1)
             s = s - 1;
+        for (var i = 0; i < 20; i++) {
+            if (pointer.isDown && Phaser.Geom.Rectangle.Contains(palette[i], pointer.x, pointer.y))
+                color = col[i];
+        }
     }, this);
     this.input.on('pointermove', function (pointer) {
         if (pointer.isDown && Phaser.Geom.Rectangle.Contains(rect, pointer.x, pointer.y)) {
