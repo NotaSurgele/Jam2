@@ -30,6 +30,11 @@ def paint():
     return render_template("paint.html")
 
 
+@app.route("/pong")
+def hello_test():
+    return render_template('pong.html')
+
+
 @app.route('/file')
 def render():
     if 'filename' in request.args:
