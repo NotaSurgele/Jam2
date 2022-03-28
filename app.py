@@ -25,6 +25,11 @@ def runner():
     return render_template('runner.html')
 
 
+@app.route("/paint")
+def paint():
+    return render_template("paint.html")
+
+
 @app.route('/file')
 def render():
     if 'filename' in request.args:
@@ -37,11 +42,6 @@ def render():
 @app.route("/<name>")
 def escape_route(name):
     return f"Hello, {escape(name)}!"
-
-
-@app.route("/paint")
-def paint():
-    return render_template("paint.html")
 
 
 if __name__ == '__main__':
