@@ -37,16 +37,28 @@
     let keys = {};
     let p1victory;
     let p2victory;
+    let music = new Object()
 
     function preload () //load everything in (like assets)
     {
-        this.load.image('paddle', '../static/assets/zorotl.jpg');
-        this.load.image('ball', '../static/assets/aqua_ball.png');
-        this.load.image('sky', '../static/assets/clouds.png');
+        this.load.image('paddle', '../static/images/zorotl.jpg');
+        this.load.image('ball', '../static/images/aqua_ball.png');
+        this.load.image('sky', '../static/images/clouds.png');
+        this.load.audio('music-jam', '../static/music/Jam_V2.mp3')
     }
 
     function create ()
     {
+        // add the music -----------------
+        music = this.sound.add("music-jam")
+        let musicConfig = {
+        mute: false,
+        loop: true,
+        delay: 0
+        }
+        music.play()
+        // -------------------------------
+
         this.add.image(400, 400, 'sky');
         ball = this.physics.add.sprite(
             this.physics.world.bounds.width / 2,

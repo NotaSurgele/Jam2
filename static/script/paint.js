@@ -15,11 +15,23 @@ var game = new Phaser.Game(config);
 var color = 0x0643C7;
 var size;
 let s = 10;
+let music = new Object()
 
 function preload() {
+    this.load.audio('music-jam', '../static/music/Jam_V2.mp3')
 }
 
 function create() {
+    // add the music -----------------
+    music = this.sound.add("music-jam")
+    let musicConfig = {
+    mute: false,
+    loop: true,
+    delay: 0
+    }
+    music.play()
+    // -------------------------------
+
     let swap = 1;
     var circle = new Phaser.Geom.Circle(0, 0, s, color);
     var rect = new Phaser.Geom.Rectangle(100, 100, 800, 600, 0x05008B);
